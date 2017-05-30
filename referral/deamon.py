@@ -12,7 +12,7 @@ def crawlData():
 def setTimer():
     now = datetime.now()
     print now.strftime("%Y-%m-%d %H:%M")
-    crawlTime = datetime(now.year, now.month, now.day, 7, 0, 0, 0)
+    crawlTime = datetime(now.year, now.month, now.day, 9, 0, 0, 0)
     print crawlTime.strftime("%Y-%m-%d %H:%M")
     if crawlTime < now:
         crawlTime = crawlTime + timedelta(days=1)
@@ -24,4 +24,4 @@ def setTimer():
 if __name__ == '__main__':
     sched = Scheduler()
     sched.daemonic = False
-    crawlData()
+    setTimer()
