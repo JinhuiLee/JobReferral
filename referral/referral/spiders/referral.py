@@ -25,7 +25,7 @@ class QuotesSpider(scrapy.Spider):
             if not u'求' in title:
                 item = ReferralItem()
                 item['title'] = title
-                item['url'] = urls[i]
-                item['hashCode'] = hash(title + urls[i])
+                item['url'] = 'http://www.1point3acres.com/bbs/' + urls[i]
+                item['hashCode'] = hash(title + item['url'])
                 print ""
                 yield(item)
