@@ -20,6 +20,9 @@ class ReferralPipeline(object):
             'url' : item['url'],
             'hashCode' : item['hashCode']
         }
+
+        if 'date' in item:
+            dbItem['date'] = item['date']
         self.dbh.insert_one(dbItem)
         return item
     

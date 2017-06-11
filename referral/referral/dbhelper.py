@@ -19,7 +19,8 @@ class DBhelper(object):
     def insert_one(self,item):
         db = self.client.indeed
         if not self.exists(item,db.repo):
-            item['date'] = str(datetime.date.today())
+            if not u'date' in item:
+                item['date'] = str(datetime.date.today())
             db.repo.insert_one(item)
 
 
@@ -31,10 +32,9 @@ class DBhelper(object):
         db = self.client.indeed
         todayData = db.repo.find({'date': str(datetime.date.today())}).sort([('date',1)]).limit(40)
 
-        #old = db.repo.find({'date': {'$ne' : str(datetime.date.today()) } }).sort([('date',1)]).limit(40)
         old = []
         today = datetime.date.today()
-        start_day = today - dateutil.relativedelta.relativedelta(days=10)
+        start_day = today - dateutil.relativedelta.relativedelta(days=20)
         for single_date in daterange(start_day, today):
             jobData = db.repo.find({'date':  str(single_date)  }).sort([('date',1)]).limit(40)
             count = jobData.count()
